@@ -16,7 +16,7 @@ class UFO{
 
             // Dome (glass top)
             let dome = document.createElement("a-sphere");
-            dome.setAttribute("color", "rgba(41, 194, 86, 1)");
+            dome.setAttribute("color", "rgba(34, 185, 79, 1)");
             dome.setAttribute("radius", "2");
             dome.setAttribute("position", "0 1 0");
             dome.setAttribute("opacity", "0.6");

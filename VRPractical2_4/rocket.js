@@ -65,7 +65,7 @@ class Rocket{
             this.obj.append( layer4 );
 
             let layer5 = document.createElement("a-cylinder");
-            layer5.setAttribute("color", "rgba(13, 35, 68, 1)");
+            layer5.setAttribute("color", "rgba(24, 60, 114, 1)");
             layer5.setAttribute("position","-1 -3 1");
             layer5.setAttribute("radius","0.5");
             layer5.setAttribute("height","4");
