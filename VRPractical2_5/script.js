@@ -83,9 +83,8 @@ window.addEventListener("DOMContentLoaded",function() {
       if(cols[c] == "x"){
         new Wall(4*c,5,4*r);
       }
-      if(cols[c] == "m"){
-        new Monster(4*c,5,4*r);
-      }
+      
+      
     }
     /* Challenge 4
        Make an appropriate decision based on the characters you chose to enter 
