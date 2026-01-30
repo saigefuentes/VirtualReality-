@@ -11,6 +11,7 @@ class Bullet{
     cone.setAttribute("radius-bottom", 0.05);
     body.setAttribute("color", "yellow");
     cone.setAttribute("color", "yellow");
+    
     let pos = camera.object3D.position;
     this.obj.setAttribute("position",{x:pos.x,y:pos.y,z:pos.z});
     this.obj.append(cone);
