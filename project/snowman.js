@@ -67,14 +67,23 @@ class Snowman {
   if (this.z > 100 || this.z < -60){
     this.dz = -this.dz;
   }
+  
 
     this.obj.setAttribute("position", {x:this.x, y:this.y, z:this.z});
-    if (this.die){
-      this.a += this.da;
-      this.y -= 0.05; 
-      this.obj.setAttribute("rotation", {x:0, y:this.a, z:0});
-      this.obj.setAttribute("position", {x:this.x, y:this.y, z:this.z});
+        if (!bullet || this.die) return;
+
+    let d = distance(bullet.obj, this.obj);
+
+    if (d < 4.5){
+      this.die = true;
       this.obj.setAttribute("visible", false);
+      enemy_killed++;
+      scene.removeChild(bullet.obj);
+      bullet = null;
+
+    }
   }
-}
-}
+
+  }
+
+

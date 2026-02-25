@@ -120,7 +120,7 @@ function loop(){
   enemyTxt.setAttribute("value", `Score: ${enemy_killed}`)
   for (let enemy of enemies){
     enemy.walk();
-    if (bullet && distance(bullet.obj, enemy.obj) < 1.5 && !enemy.die){
+    if (bullet && distance(bullet.obj, enemy.obj) < 2.5 && !enemy.die){
       enemy.die = true;
       enemy_killed++;
     }
