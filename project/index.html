@@ -1,107 +1,45 @@
-<!DOCTYPE html>
-<html>
+  <html>
   <head>
-    <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-
-    <!-- Physics system -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-
-    <!-- Your scripts -->
     <script src="bullet.js"></script>
     <script src="script.js"></script>
-    <script src="snowman.js"></script>
-    <script src="ammobox.js"></script>
-    <script src="tree.js"></script>
-    <script src="otherTree.js"></script>
-
-    <!-- TARGET HIT LOGIC -->
-    <script>
-      AFRAME.registerComponent('disappear-on-bullet-hit', {
-        init: function () {
-          this.el.addEventListener('collide', (e) => {
-            const hitEl = e.detail.body.el;
-
-            if (hitEl && hitEl.classList.contains('bullet')) {
-
-              // remove target
-              this.el.parentNode.removeChild(this.el);
-
-              // remove bullet
-              hitEl.parentNode.removeChild(hitEl);
-
-              // update score
-              const scoreText = document.querySelector('#enemies_killed');
-              if (scoreText) {
-                let current = scoreText.getAttribute('value');
-                let num = parseInt(current.split(': ')[1] || 0);
-                scoreText.setAttribute('value', 'Score: ' + (num + 1));
-              }
-            }
-          });
-        }
-      });
-    </script>
+    <script src = "snowman.js"></script>
+    <script src = "ammobox.js"></script>
+    <script src = "tree.js"></script>
+    <script src ="otherTree.js"></script>
   </head>
-
   <body>
-    <a-scene physics cursor="rayOrigin: mouse">
+    <a-scene cursor="rayOrigin: mouse" >
 
-      <a-light type="point" color="#ffffff" intensity="10" distance="150" position="2 25 -10"></a-light>
+      <a-light type="point" color="#ffffff" intensity="10" distance="150" position = "2 25 -10"></a-light>
 
-      <a-plane
-        position="0 0 -1"
-        rotation="-90 0 0"
-        width="200"
-        height="200"
-        color="white">
-      </a-plane>
-
-      <a-sky
-        rotation="0 -90 0"
-        side="double"
-        src="sky.jpg">
-      </a-sky>
-
+      <a-plane position="0 0 -1" rotation="-90 0 0" width="200" height="200" color="white" repeat="15 -15" ></a-plane>
+      <a-sky rotation="0 -90 0" side = "double" src = "sky.jpg" repeat="10 -10"></a-sky>
+      
       <a-camera active id="mainCamera" position="0 1.6 0">
         <a-cursor raycaster="objects: .clickable">
+        <a-text id="ammo_count" position="-3 1.5 -1" value="Ammo: " color="blue"></a-text>
+        <a-text id="enemies_killed" position="1.5 1.5 -1" value="Score: " color="blue"></a-text>
+        <a-text id="health" position="1.5 1 -1" value="Health: " color="blue"></a-text>
+        <a-text id="timer" position="-3 1 -1" value="Time: " color="blue"></a-text>
+        <a-text id="gameover" value ="GAME OVER" position="-2 0 -2" color="white" visible="false" scale="3 3 3"></a-text>
+        <a-text value="Objective : pick up rocks and throw them at the targets to destory them. destory all the targets before the time runs out and dont get hit by the target or you lose health" position = "-2.5 4 -5" color = "white"></a-text>
+        <a-image id = "gameover_img" src = "gameover.png" position ="0 0 -2" visible="false" scale="5 5 5"></a-image>
+        <a-text id="youwin" value ="YOU WIN!" position="-1.5 0 -2" color="white" visible="false" scale="3 3 3"></a-text>
+        <a-image id="youwin_img" src="winner.png" position="0 0 -2" visible="false" scale="5 5 5"></a-image>
+        <a-image src = "gun.png" position ="0.5 -0.5 -0.2" ></a-image> 
 
-          <a-text id="ammo_count" position="-3 1.5 -1" value="Ammo: " color="blue"></a-text>
-          <a-text id="enemies_killed" position="1.5 1.5 -1" value="Score: 0" color="blue"></a-text>
-          <a-text id="health" position="1.5 1 -1" value="Health: " color="blue"></a-text>
-          <a-text id="timer" position="-3 1 -1" value="Time: " color="blue"></a-text>
-
-          <a-text id="gameover" value="GAME OVER" position="-2 0 -2" color="white" visible="false" scale="3 3 3"></a-text>
-
-          <a-text
-            value="Objective: pick up rocks and throw them at the targets to destroy them before time runs out"
-            position="-2.5 4 -5"
-            color="white">
-          </a-text>
-
-          <a-image id="gameover_img" src="gameover.png" position="0 0 -2" visible="false" scale="5 5 5"></a-image>
-
-          <a-text id="youwin" value="YOU WIN!" position="-1.5 0 -2" color="white" visible="false" scale="3 3 3"></a-text>
-          <a-image id="youwin_img" src="winner.png" position="0 0 -2" visible="false" scale="5 5 5"></a-image>
-
-          <a-image src="gun.png" position="0.5 -0.5 -0.2"></a-image>
-
-          <a-image id="full_health" src="fullhealthbar.png" position="2.2 0.78 -1"></a-image>
-          <a-image id="half_health" src="halfhealth.png" position="2.2 0.62 -1" visible="false"></a-image>
-          <a-image id="no_health" src="nohealth.png" position="2.18 0.62 -1" visible="false"></a-image>
-
+        <a-image id = "full_health" src = "fullhealthbar.png" position = "2.2 0.78 -1" visible = "true" ></a-image>
+        <a-image id = "half_health" src = "halfhealth.png" position = "2.2 0.62 -1" visible = "false" ></a-image>
+        <a-image id = "no_health" src = "nohealth.png" position = "2.18 0.62 -1" visible = "false" ></a-image>
+        
+          
         </a-cursor>
+          
       </a-camera>
 
-      <!-- EXAMPLE TARGET -->
-      <!-- Add this logic to your snowman / tree targets -->
-      <a-box
-        position="3 1 -5"
-        color="red"
-        static-body
-        disappear-on-bullet-hit>
-      </a-box>
-
+        <a-light type="point" color="#ffffff" intensity="4" distance="100"></a-light>
+      </a-sphere>
     </a-scene>
   </body>
 </html>

@@ -27,5 +27,6 @@ class Bullet{
     this.obj.object3D.position.x += this.dx * 6;
     this.obj.object3D.position.y += this.dy * 6;
     this.obj.object3D.position.z += this.dz * 6;
+    
   }
 }

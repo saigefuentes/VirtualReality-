@@ -74,6 +74,7 @@ class Snowman {
       this.y -= 0.05; 
       this.obj.setAttribute("rotation", {x:0, y:this.a, z:0});
       this.obj.setAttribute("position", {x:this.x, y:this.y, z:this.z});
+      this.obj.setAttribute("visible", false);
   }
 }
 }
